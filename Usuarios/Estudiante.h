@@ -2,6 +2,9 @@
 
 class Estudiante{
     public:
+    /* Para inicializar un objeto de la clase estudiante, este recibe dos parametros, el primero sería el código de
+       tipo string y el segundo recibe un array de tipo puntero string, para que pueda leer el array correctamente
+    */
         Estudiante(std::string codigo, std::string* profesores) : cod(codigo){
     /* Aqui se copia cada item del arreglo de "profesores" incluyendolo en el arreglo "prof" en la posición que le
        corresponde, cabe recalcar que el arreglo es de tamaño 6 puesto que es el máximo de profesores que un alumno
