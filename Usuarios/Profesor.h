@@ -1,4 +1,3 @@
-#include <iostream>
 #include <string>
 #include "Estudiante.h"
 #include "Usuario.h"
@@ -12,36 +11,19 @@ class Profesor : public Usuario{
 		string c;
 		
 	public:
-		Profesor(std::string correo, std::string carrera, std::string nombre, string materia, int valoracion) :
-		Usuario(correo, carrera, nombre), m(materia), v(valoracion), c(carrera){
-			if (v < 1) {
-				v = 1;
-			}
-		}
+		Profesor(string correo, string carrera, string nombre, string materia, int valoracion);
 
-		void setMateria(int mat) {
-			m = mat;
-		}
+		void setMateria(int mat);
 
-		string getMateria() {
-			return m;
-		}
+		string getMateria();
 
-		void setValoracion(int valoracion) {
-			v = valoracion;
-		}
+		void setValoracion(int valoracion);
 
-		int getValoracion() {
-			return v;
-		}
+		int getValoracion();
 
-		void setCarrera(string carrera){
-			c = carrera;
-		}
+		void setCarrera(string carrera);
 
-		string getCarrera() {
-			return c;
-		}
+		string getCarrera();
 
 		friend class Estudiante;
 };
