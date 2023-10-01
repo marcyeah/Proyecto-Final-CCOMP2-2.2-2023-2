@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 
 class Usuario{
@@ -50,7 +51,7 @@ class Usuario{
         }
         */
 
-    private:
+    protected:
         std::string cor;
         std::string car;
         std::string nom;
