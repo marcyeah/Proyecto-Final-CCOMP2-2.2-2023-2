@@ -5,7 +5,7 @@ class Estudiante : public Usuario{
     public:
         Estudiante(std::string correo, std::string carrera, std::string nombre, std::string codigo, std::string* profesores);
 
-        void añadirContribucion();
+        void anadirContribucion();
         void setValoracion(int n, Profesor& profesor);
         int getContribuciones();
 
