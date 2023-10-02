@@ -8,7 +8,7 @@ Estudiante::Estudiante (std::string correo, std::string carrera, std::string nom
     }
 }
 
-void Estudiante::añadirContribucion(){
+void Estudiante::anadirContribucion(){
     ncont++;
 }
 
