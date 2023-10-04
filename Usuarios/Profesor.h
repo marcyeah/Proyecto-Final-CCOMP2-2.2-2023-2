@@ -1,3 +1,5 @@
+#ifndef PROF_H
+#define PROF_H
 #include <string>
 #include "Estudiante.h"
 #include "Usuario.h"
@@ -27,3 +29,5 @@ class Profesor : public Usuario{
 
 		friend class Estudiante;
 };
+
+#endif
