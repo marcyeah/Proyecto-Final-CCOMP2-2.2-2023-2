@@ -6,9 +6,9 @@
 
 class Aviso : public Usuario {
 public:
-    Aviso(const std::string& correo, const std::string& contrasena, const std::string& titulo, const std::string& comentario);
+    Aviso(std::string correo, std::string carrera, std::string nombre, const std::string& titulo, const std::string& comentario);
 
-    void MostrarAviso() const;
+    void MostrarAviso();
 
 private:
     std::string titulo_;

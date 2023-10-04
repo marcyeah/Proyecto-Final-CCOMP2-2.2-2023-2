@@ -6,8 +6,8 @@
 
 class Foro {
 public:
-    void AgregarAviso(const Aviso& aviso);
-    void MostrarAvisos() const;
+    void AgregarAviso(Aviso& aviso);
+    void MostrarAvisos();
 
 
 private:
