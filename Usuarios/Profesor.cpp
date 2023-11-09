@@ -8,7 +8,7 @@ Profesor::Profesor(string correo, string carrera, string nombre, string materia,
 	}
 }
 
-void Profesor::setMateria(int mat) {
+void Profesor::setMateria(string mat) {
 	m = mat;
 }
 
