@@ -4,23 +4,23 @@
 
 class Usuario{
     public:
-        Usuario(std::string correo, std::string carrera, std::string nombre);
-        // En esta parte se debe extraer la contraseña del archivo "contrasenas.txt" y asignarla a contra
-        /* Esta función tiene como objetivo verificar si la contraseña y el correo ingresados coinciden con los datos del 
-           usuario, y asegurarse de que los datos ingresados sean válidos
-        */
-        bool iniciarSesion(std::string cor, std::string con);
+        Usuario(std::string correo, std::string carrera, std::string nombre) : cor(correo), car(carrera), nom(nombre){
+        }
 
-        std::string getCorreo();
+        std::string getCorreo(){
+            return cor;
+        }
 
-        std::string getNombre();
+        std::string getCarrera(){
+            return car;
+        }
 
-        std::string getCarrera();
+        std::string getNombre(){
+            return nom;
+        }
 
-        /* Sugerencia de Función para cambiar contraseña
-        void cambiarContra(std::string correo, std::string con);
-        */
-
+        ~Usuario(){}
+        
     protected:
         std::string cor;
         std::string car;

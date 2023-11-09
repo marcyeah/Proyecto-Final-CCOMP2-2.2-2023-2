@@ -10,6 +10,7 @@ class Estudiante : public Usuario{
 
         void anadirContribucion();
         void setValoracion(int n, Profesor& profesor);
+        void calc(double per1, double par1, int p1, int p2);
         int getContribuciones();
 
     private:

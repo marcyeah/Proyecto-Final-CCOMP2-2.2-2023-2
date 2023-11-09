@@ -8,6 +8,6 @@ void Foro::AgregarAviso(Aviso& aviso) {
 void Foro::MostrarAvisos() {
     for (Aviso& aviso : avisos_) {
         aviso.MostrarAviso();
-        std::cout << "-------------------" << std::endl;
+        std::cout << "⏑⏑⏑⏑⏑⏑⏑⏑⏑⏑⏑⏑⏑⏑⏑⏑⏑⏑⏑⏑" << std::endl;
     }
 }

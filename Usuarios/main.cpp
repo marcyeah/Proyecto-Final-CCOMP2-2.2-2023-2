@@ -1,33 +1,152 @@
 #include <iostream>
+#include <fstream>
 #include <string>
+#include <unordered_map>
 
+#include "Aviso.h"
 #include "Estudiante.h"
 #include "Estudiante.cpp"
 #include "Foro.h"
-#include "Foro.cpp"
-#include "Aviso.h"
-#include "Aviso.cpp"
 #include "Profesor.h"
 #include "Profesor.cpp"
+#include "Recursos.h"
 #include "Usuario.h"
-#include "Usuario.cpp"
+
+using namespace std;
+
+unordered_map<string, string>Identidad;
+
+void Datos();
+void Registrarse();
+bool Iniciar() {
+    string correo, contra;
+    cout << "Ingrese su correo electrónico: ";
+    cin >> correo;
+
+    string i = Identidad.find(correo);
+    if (i != Identidad.end()) {
+        cout << "Usuario encontrado. Ingrese su contraseña: ";
+        cin >> contra;
+        if (i -> second == contra) {
+            cout << "Inicio de sesión exitoso.\n";
+            return true;
+        } else {
+            cout << "Contraseña incorrecta.\n";
+            return false;
+        }
+    } else {
+        cout << "Error: Correo electrónico no registrado.\n";
+        return false;
+    }
+}
 
 int main() {
-    string prof[] = {"María", "Luis", "Juan", "Alberto", "Jose", "Rosa"};
-    Estudiante estudiante1("shaygb@gmail.com", "Arquitectura", "Luis", "1892uhsaA", prof);
-
-    Aviso aviso1("José@gmail.com", "CCOMP", "Jose", "Aviso 1", "Clases en la mañana");
-    Aviso aviso2("Alberto@hotmail.com", "Psicologia", "Alberto", "Aviso 2", "A qué hora?");
-
-    std::cout << estudiante1.getNombre() << std::endl;
-    std::cout << estudiante1.getCarrera() << std::endl;
-
+    Recursos recursos;
     Foro foro;
-    foro.AgregarAviso(aviso1);
-    foro.AgregarAviso(aviso2);
 
-    std::cout << "Avisos en el foro:" << std::endl;
-    foro.MostrarAvisos();
+    Datos();
+
+    char opcion;
+    do {
+        cout << "¿Desea registrarse (R) o iniciar sesión (I)? ";
+        cin >> opcion;
+
+        if (opcion == 'R' || opcion == 'r') {
+            Registrarse();
+        } else if (opcion == 'I' || opcion == 'i') {
+            Iniciar();
+        } else {
+            cout << "Intente nuevamente.\n";
+        }
+    } while (opcion != 'I' && opcion != 'i');
+
+    string correo;
+    cout << "Ingrese su correo electronico: ";
+    getline(cin, correo);
+
+    string carrera;
+    cout << "Ingrese su carrera profesional: ";
+    getline(cin, carrera);
+
+    string titulo;
+    cout << "Ingrese el titulo: ";
+    getline(cin, titulo);
+
+    string mensaje;
+    cout << "Ingrese el mensaje: ";
+    getline(cin, mensaje);
+
+    string nombre;
+
+    int inicio = 0;
+    int fin = 0;
+    while(fin = correo.find("@", inicio), fin >= 0){
+        nombre = correo.substr(inicio, fin - inicio);
+        inicio = fin + 1;
+    }
+
+    Aviso aviso1(correo, carrera, nombre, titulo, mensaje);
+
+    foro.AgregarAviso(aviso1);
+
+    int opc;
+    int cursos;
+
+    cout << "Elige una opcion: \nOpcion 1: Recursos\nOpcion 2: Mostrar avisos\n";
+    cin >> opc; 
+
+    switch(opc){
+        case 1:
+            while(true){
+                cout << "Elije un curso (1-" << recursos.obtenerCursosDisponibles()<< "): ";
+                cin >> cursos;
+                if(cursos < 1 || cursos > recursos.obtenerCursosDisponibles()){
+                    cout << "Curso no valido, intente de nuevo." << endl;
+                }
+                else{
+                    break;
+                }
+            }
+            recursos.escoger_cursos(cursos);
+            break;
+        case 2:
+            cout << "\nAvisos en el foro:" << endl;
+            foro.MostrarAvisos();
+        default:
+            cout << "El numero que usted a elegido, sobrepasa el rango de opciones disponibles" << endl;
+            break;
+    }
 
     return 0;
+}
+
+void Datos() {
+    ifstream lector("usuarios.txt");
+    if (lector.is_open()) {
+        string correo, contra;
+        while (lector >> correo >> contra) {
+            Identidad[correo] = contra;
+        }
+        lector.close();
+    }
+}
+
+void Registrarse() {
+    string correo, contra;
+    cout << "Ingrese su nuevo correo electrónico: ";
+    cin >> correo;
+
+    cout << "Ingrese su nueva contraseña: ";
+    cin >> contra;
+
+    
+    Identidad[correo] = contra;
+    cout << "Usuario registrado correctamente.\n";
+
+
+    ofstream lector("usuarios.txt", ios::app); 
+    if (lector.is_open()) {
+        lector << correo << " " << contra << endl;
+        lector.close();
+    }
 }
