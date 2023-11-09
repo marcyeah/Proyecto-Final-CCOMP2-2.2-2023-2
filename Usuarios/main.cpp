@@ -23,7 +23,7 @@ bool Iniciar() {
     cout << "Ingrese su correo electrónico: ";
     cin >> correo;
 
-    string i = Identidad.find(correo);
+    auto i = Identidad.find(correo);
     if (i != Identidad.end()) {
         cout << "Usuario encontrado. Ingrese su contraseña: ";
         cin >> contra;
