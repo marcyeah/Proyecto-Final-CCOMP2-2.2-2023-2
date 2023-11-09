@@ -16,6 +16,7 @@ using namespace std;
 
 unordered_map<string, string>Identidad;
 
+string Correo(int);
 void Datos();
 void Registrarse();
 bool Iniciar() {
@@ -55,18 +56,12 @@ int main() {
             Registrarse();
         } else if (opcion == 'I' || opcion == 'i') {
             Iniciar();
+        } else if (opcion == 'S') {
+            break;
         } else {
             cout << "Intente nuevamente.\n";
         }
     } while (opcion != 'I' && opcion != 'i');
-
-    string correo;
-    cout << "Ingrese su correo electronico: ";
-    getline(cin, correo);
-
-    string carrera;
-    cout << "Ingrese su carrera profesional: ";
-    getline(cin, carrera);
 
     string titulo;
     cout << "Ingrese el titulo: ";
@@ -80,12 +75,12 @@ int main() {
 
     int inicio = 0;
     int fin = 0;
-    while(fin = correo.find("@", inicio), fin >= 0){
-        nombre = correo.substr(inicio, fin - inicio);
+    while(fin = Correo(0).find("@", inicio), fin >= 0){
+        nombre = Correo(0).substr(inicio, fin - inicio);
         inicio = fin + 1;
     }
 
-    Aviso aviso1(correo, carrera, nombre, titulo, mensaje);
+    Aviso aviso1(Correo(0), carrera, nombre, titulo, mensaje);
 
     foro.AgregarAviso(aviso1);
 
@@ -148,5 +143,18 @@ void Registrarse() {
     if (lector.is_open()) {
         lector << correo << " " << contra << endl;
         lector.close();
+    }
+}
+
+string Correo(int max) {
+    int cont{0};
+    ifstream archivo("usuarios.txt");
+    string correo;
+
+    while(getline(archivo, correo)) {
+        if(max == cont) {
+            return correo;
+        }
+        cont++;
     }
 }
