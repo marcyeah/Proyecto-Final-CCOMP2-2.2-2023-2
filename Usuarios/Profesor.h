@@ -15,7 +15,7 @@ class Profesor : public Usuario{
 	public:
 		Profesor(string correo, string carrera, string nombre, string materia, int valoracion);
 
-		void setMateria(int mat);
+		void setMateria(string mat);
 
 		string getMateria();
 
