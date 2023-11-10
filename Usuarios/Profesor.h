@@ -13,19 +13,35 @@ class Profesor : public Usuario{
 		string c;
 		
 	public:
-		Profesor(string correo, string carrera, string nombre, string materia, int valoracion);
+		Profesor(string correo, string carrera, string nombre, string materia, int valoracion) : Usuario(correo, carrera, nombre), m(materia), v(valoracion), c(carrera){
+			if (v < 1) {
+				v = 1;
+			}
+		}
 
-		void setMateria(string mat);
+		void setMateria(string mat) {
+			m = mat;
+		}
 
-		string getMateria();
+		string getMateria() {
+			return m;
+		}
 
-		void setValoracion(int valoracion);
+		void setValoracion(int valoracion) {
+			v = valoracion;
+		}
 
-		int getValoracion();
+		int getValoracion() {
+			return v;
+		}
 
-		void setCarrera(string carrera);
+		void setCarrera(string carrera){
+			c = carrera;
+		}
 
-		string getCarrera();
+		string getCarrera() {
+			return c;
+		}
 
 		friend class Estudiante;
 };

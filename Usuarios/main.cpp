@@ -5,10 +5,8 @@
 
 #include "Aviso.h"
 #include "Estudiante.h"
-#include "Estudiante.cpp"
 #include "Foro.h"
 #include "Profesor.h"
-#include "Profesor.cpp"
 #include "Recursos.h"
 #include "Usuario.h"
 
@@ -16,6 +14,7 @@ using namespace std;
 
 unordered_map<string, string>Identidad;
 
+string Extraer(int, char);
 string Correo(int);
 void Datos();
 void Registrarse();
@@ -48,6 +47,7 @@ int main() {
     Datos();
 
     char opcion;
+
     do {
         cout << "¿Desea registrarse (R) o iniciar sesión (I)? ";
         cin >> opcion;
@@ -56,46 +56,33 @@ int main() {
             Registrarse();
         } else if (opcion == 'I' || opcion == 'i') {
             Iniciar();
-        } else if (opcion == 'S') {
+        } else if (opcion == 'S' || opcion == 's') {
             break;
         } else {
             cout << "Intente nuevamente.\n";
         }
     } while (opcion != 'I' && opcion != 'i');
 
+    fflush(stdin);
+
     string carrera;
     cout << "Ingrese su carrera: ";
     getline(cin, carrera);
-    cin.ignore();
+    fflush(stdin);
 
     string titulo;
     cout << "Ingrese el titulo: ";
     getline(cin, titulo);
-    cin.ignore();
+    fflush(stdin);
 
     string mensaje;
     cout << "Ingrese el mensaje: ";
     getline(cin, mensaje);
-    cin.ignore();
 
-    string nombre;
-    string correo;
+    string correo, nombre;
 
-    int inicio = 0;
-    int fin = 0;
-    
-    while(fin = Correo(0).find("@", inicio), fin >= 0){
-        nombre = Correo(0).substr(inicio, fin - inicio);
-        inicio = fin + 1;
-    }
-
-    int inicio1 = 0;
-    int fin1 = 0;
-
-    while(fin1 = Correo(0).find(" ", inicio1), fin1 >= 0){
-        correo = Correo(0).substr(inicio1, fin1 - inicio1);
-        inicio1 = fin1 + 1;
-    }
+    correo = Extraer(0, ' ');
+    nombre = Extraer(0, '@');
 
     Aviso aviso1(correo, carrera, nombre, titulo, mensaje);
 
@@ -106,7 +93,7 @@ int main() {
 
     fflush(stdin);
 
-    cout << "Elige una opcion: \nOpcion 1: Recursos\nOpcion 2: Mostrar avisos\nescoja opcion: ";
+    cout << "Elige una opcion: \nOpcion 1: Recursos\nOpcion 2: Mostrar avisos\nEscoja opcion: ";
     cin >> opc;
     
     fflush(stdin);
@@ -126,10 +113,12 @@ int main() {
             }
             recursos.escoger_cursos(cursos);
             break;
+
         case 2:
             cout << "\nAvisos en el foro:" << endl;
             foro.MostrarAvisos();
             break;
+        
         default:
             cout << "El numero que usted a elegido, sobrepasa el rango de opciones disponibles" << endl;
             break;
@@ -167,6 +156,18 @@ void Registrarse() {
         lector << correo << " " << contra << endl;
         lector.close();
     }
+}
+
+string Extraer(int n, char c) {
+    int inicio{0};
+    int fin{0};
+    string cad;
+    
+    while(fin = Correo(n).find(c, inicio), fin >= 0){
+        cad = Correo(n).substr(inicio, fin - inicio);
+        inicio = fin + 1;
+    }
+    return cad;
 }
 
 string Correo(int max) {

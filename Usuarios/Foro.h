@@ -9,7 +9,7 @@ class Foro {
 public:
     void AgregarAviso(Aviso& aviso) {
     avisos_.push_back(aviso);
-}
+    }
 
     void MostrarAvisos() {
         for (Aviso& aviso : avisos_) {
@@ -17,6 +17,7 @@ public:
             aviso.MostrarAviso();
         }
     }
+
 private:
     std::vector<Aviso> avisos_;
 };

@@ -2,7 +2,7 @@
 #define US_H
 #include <string>
 
-class Usuario{
+class Usuario {
     public:
         Usuario(std::string correo, std::string carrera, std::string nombre) : cor(correo), car(carrera), nom(nombre){
         }
