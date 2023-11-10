@@ -63,36 +63,58 @@ int main() {
         }
     } while (opcion != 'I' && opcion != 'i');
 
+    string carrera;
+    cout << "Ingrese su carrera: ";
+    getline(cin, carrera);
+    cin.ignore();
+
     string titulo;
     cout << "Ingrese el titulo: ";
     getline(cin, titulo);
+    cin.ignore();
 
     string mensaje;
     cout << "Ingrese el mensaje: ";
     getline(cin, mensaje);
+    cin.ignore();
 
     string nombre;
+    string correo;
 
     int inicio = 0;
     int fin = 0;
+    
     while(fin = Correo(0).find("@", inicio), fin >= 0){
         nombre = Correo(0).substr(inicio, fin - inicio);
         inicio = fin + 1;
     }
 
-    Aviso aviso1(Correo(0), carrera, nombre, titulo, mensaje);
+    int inicio1 = 0;
+    int fin1 = 0;
+
+    while(fin1 = Correo(0).find(" ", inicio1), fin1 >= 0){
+        correo = Correo(0).substr(inicio1, fin1 - inicio1);
+        inicio1 = fin1 + 1;
+    }
+
+    Aviso aviso1(correo, carrera, nombre, titulo, mensaje);
 
     foro.AgregarAviso(aviso1);
 
     int opc;
     int cursos;
 
-    cout << "Elige una opcion: \nOpcion 1: Recursos\nOpcion 2: Mostrar avisos\n";
-    cin >> opc; 
+    fflush(stdin);
 
+    cout << "Elige una opcion: \nOpcion 1: Recursos\nOpcion 2: Mostrar avisos\nescoja opcion: ";
+    cin >> opc;
+    
+    fflush(stdin);
+    
     switch(opc){
         case 1:
             while(true){
+                recursos.mostrar_cursos();
                 cout << "Elije un curso (1-" << recursos.obtenerCursosDisponibles()<< "): ";
                 cin >> cursos;
                 if(cursos < 1 || cursos > recursos.obtenerCursosDisponibles()){
@@ -107,6 +129,7 @@ int main() {
         case 2:
             cout << "\nAvisos en el foro:" << endl;
             foro.MostrarAvisos();
+            break;
         default:
             cout << "El numero que usted a elegido, sobrepasa el rango de opciones disponibles" << endl;
             break;
