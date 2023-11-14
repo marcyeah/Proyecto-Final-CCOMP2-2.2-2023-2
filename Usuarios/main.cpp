@@ -4,6 +4,7 @@
 #include <unordered_map>
 
 #include "Aviso.h"
+#include "Cesar.h"
 #include "Estudiante.h"
 #include "Foro.h"
 #include "Profesor.h"
