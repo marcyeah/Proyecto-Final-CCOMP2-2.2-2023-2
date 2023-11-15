@@ -1,10 +1,11 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <stdlib.h>
 #include <unordered_map>
 
 #include "Aviso.h"
-#include "Cesar.h"
+#include "Cypher.h"
 #include "Estudiante.h"
 #include "Foro.h"
 #include "Profesor.h"
@@ -28,8 +29,10 @@ bool Iniciar() {
     if (i != Identidad.end()) {
         cout << "Usuario encontrado. Ingrese su contraseña: ";
         cin >> contra;
-        if (i -> second == contra) {
+        Cypher cript(contra);
+        if (i -> second == cript.Cifrado()) {
             cout << "Inicio de sesión exitoso.\n";
+            cout << endl;
             return true;
         } else {
             cout << "Contraseña incorrecta.\n";
@@ -50,13 +53,21 @@ int main() {
     char opcion;
 
     do {
+        bool a;
         cout << "¿Desea registrarse (R) o iniciar sesión (I)? ";
         cin >> opcion;
 
         if (opcion == 'R' || opcion == 'r') {
             Registrarse();
         } else if (opcion == 'I' || opcion == 'i') {
-            Iniciar();
+            do {
+                int cont{0};
+                a = Iniciar();
+                if(cont > 3){
+                    return 0;
+                }
+                cont++;
+            } while (a == false);
         } else if (opcion == 'S' || opcion == 's') {
             break;
         } else {
@@ -72,18 +83,19 @@ int main() {
     fflush(stdin);
 
     string titulo;
-    cout << "Ingrese el titulo: ";
+    cout << "Ingrese el título: ";
     getline(cin, titulo);
     fflush(stdin);
 
     string mensaje;
     cout << "Ingrese el mensaje: ";
     getline(cin, mensaje);
+    cout << endl;
 
     string correo, nombre;
 
-    correo = Extraer(1, ' ');
-    nombre = Extraer(1, '@');
+    correo = Extraer(0, ' ');
+    nombre = Extraer(0, '@');
 
     Aviso aviso1(correo, carrera, nombre, titulo, mensaje);
 
@@ -94,7 +106,7 @@ int main() {
 
     fflush(stdin);
 
-    cout << "Elige una opcion: \nOpcion 1: Recursos\nOpcion 2: Mostrar avisos\nEscoja opcion: ";
+    cout << "Escoge una opción: \nOpción 1: Recursos\nOpción 2: Mostrar avisos\n";
     cin >> opc;
     
     fflush(stdin);
@@ -103,10 +115,10 @@ int main() {
         case 1:
             while(true){
                 recursos.mostrar_cursos();
-                cout << "Elije un curso (1-" << recursos.obtenerCursosDisponibles()<< "): ";
+                cout << "Elige un curso (1-" << recursos.obtenerCursosDisponibles()<< "): ";
                 cin >> cursos;
                 if(cursos < 1 || cursos > recursos.obtenerCursosDisponibles()){
-                    cout << "Curso no valido, intente de nuevo." << endl;
+                    cout << "Curso no válido, intente de nuevo." << endl;
                 }
                 else{
                     break;
@@ -121,7 +133,7 @@ int main() {
             break;
         
         default:
-            cout << "El numero que usted a elegido, sobrepasa el rango de opciones disponibles" << endl;
+            cout << "El número que usted ha elegido, sobrepasa el rango de opciones disponibles." << endl;
             break;
     }
 
@@ -140,13 +152,14 @@ void Datos() {
 }
 
 void Registrarse() {
-    string correo, contra;
+    string correo, contra;  
     cout << "Ingrese su nuevo correo electrónico: ";
     cin >> correo;
 
     cout << "Ingrese su nueva contraseña: ";
     cin >> contra;
 
+    Cypher cript(contra);
     
     Identidad[correo] = contra;
     cout << "Usuario registrado correctamente.\n";
@@ -154,7 +167,7 @@ void Registrarse() {
 
     ofstream lector("usuarios.txt", ios::app); 
     if (lector.is_open()) {
-        lector << correo << " " << contra << endl;
+        lector << correo << " " << cript.Cifrado() << endl;
         lector.close();
     }
 }

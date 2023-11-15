@@ -4,9 +4,9 @@
 #include <iostream>
 #include <string>
 
-class Cesar {
+class Cypher {
     public:
-        Cesar(std::string& contra) : con(contra), num(contra.length()/2){}
+        Cypher(std::string& contra) : con(contra), num(contra.length()/2){}
         int fibo(int n){
             int n1{1};
             int n2{2};
@@ -20,7 +20,7 @@ class Cesar {
             return sum;
         }
 
-        ~Cesar(){};
+        ~Cypher(){};
         
         std::string& Cifrado(){
             int or_num = num;
