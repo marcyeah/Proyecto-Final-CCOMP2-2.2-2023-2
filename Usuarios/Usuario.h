@@ -16,10 +16,18 @@ class Usuario {
         }
 
         std::string getNombre(){
+            nom[0] = toupper(nom[0]);
+            for(int i{1}; i < nom.length(); i++){
+                if(nom[i] == '.'){
+                    nom[i] = ' ';
+                    nom[i+1] = toupper(nom[i+1]);
+                    break;
+                }
+            }
             return nom;
         }
 
-        ~Usuario(){}
+        ~Usuario(){};
         
     protected:
         std::string cor;

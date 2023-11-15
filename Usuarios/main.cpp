@@ -82,8 +82,8 @@ int main() {
 
     string correo, nombre;
 
-    correo = Extraer(0, ' ');
-    nombre = Extraer(0, '@');
+    correo = Extraer(1, ' ');
+    nombre = Extraer(1, '@');
 
     Aviso aviso1(correo, carrera, nombre, titulo, mensaje);
 
