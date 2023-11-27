@@ -2,11 +2,11 @@
 #define US_H
 
 #include <string>
+#include "Foro.h"
 
 class Usuario {
     public:
         Usuario(std::string correo, std::string carrera, std::string nombre) : cor(correo), car(carrera), nom(nombre){}
-        Usuario(std::string correo, std::string contra): cor(correo), con(contra){}
 
         std::string getCorreo(){
             return cor;
@@ -28,16 +28,19 @@ class Usuario {
             return nom;
         }
 
+        void MostrarAviso(std::string titulo, std::string comentario) {
+            std::cout << "Nombre: " << getNombre() << std:: endl;
+            std::cout << "Título: " << titulo << std::endl;
+            std::cout << "Comentario: " << "\"" << comentario << "\"" << std::endl;
+            std::cout << "Autor: " << getCorreo() << std::endl;
+        }
+
         ~Usuario(){}
 
-        virtual std::string Categoria() = 0;
-        virtual std::string Archivo() = 0;
-        
     protected:
         std::string cor;
         std::string car;
         std::string nom;
-        std::string con;
 
 };
 

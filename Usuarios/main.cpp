@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <unordered_map>
 
-#include "Aviso.h"
 #include "Cypher.h"
 #include "Estudiante.h"
 #include "Foro.h"
@@ -97,16 +96,16 @@ int main() {
     correo = Extraer(0, ' ');
     nombre = Extraer(0, '@');
 
-    Aviso aviso1(correo, carrera, nombre, titulo, mensaje);
+    Usuario usuario(correo, carrera, nombre);
 
-    foro.AgregarAviso(aviso1);
+    foro.AgregarAviso();
 
     int opc;
     int cursos;
 
     fflush(stdin);
 
-    cout << "Escoge una opción: \nOpción 1: Recursos\nOpción 2: Mostrar avisos\n";
+    cout << "Elige una opción: \nOpción 1: Recursos\nOpción 2: Mostrar avisos\n";
     cin >> opc;
     
     fflush(stdin);
@@ -130,6 +129,7 @@ int main() {
         case 2:
             cout << "\nAvisos en el foro:" << endl;
             foro.MostrarAvisos();
+            usuario.MostrarAviso(titulo, mensaje);
             break;
         
         default:

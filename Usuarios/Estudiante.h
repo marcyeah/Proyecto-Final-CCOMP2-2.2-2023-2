@@ -8,17 +8,8 @@
 
 class Estudiante : public Usuario{
     public:
-        Estudiante(std::string correo, std::string contra) : Usuario(correo, contra) {}
         Estudiante (std::string correo, std::string carrera, std::string nombre, std::string codigo, Profesor* profesores) 
         : Usuario(correo, carrera, nombre), cod(codigo), profesores(profesores){}
-
-        std::string Categoria() override {   
-            return "Estudiante";
-        }
-
-        std::string Archivo() override {
-            return "Estudiantes.txt";
-        }
 
         void anadirContribucion(){
             ncont++;

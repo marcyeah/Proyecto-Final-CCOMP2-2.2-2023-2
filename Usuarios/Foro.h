@@ -3,23 +3,20 @@
 
 #include <vector>
 #include <iostream>
-#include "Aviso.h"
 
 class Foro {
-public:
-    void AgregarAviso(Aviso& aviso) {
-    avisos_.push_back(aviso);
-    }
-
-    void MostrarAvisos() {
-        for (Aviso& aviso : avisos_) {
-            std::cout << "-------------------" << std::endl;
-            aviso.MostrarAviso();
+    public:
+        void AgregarAviso() {
+            cont++;
         }
-    }
+        void MostrarAvisos() {
+            for (int i{1}; i < cont; i++) {
+                std::cout << "-------------------" << std::endl;
+            }
+        }
 
-private:
-    std::vector<Aviso> avisos_;
+    private:
+        int cont{1};
 };
 
 #endif
