@@ -52,6 +52,10 @@ int main() {
     Estructuras Discreta;
     Programacion Progra;
     vector<Cursos*> cursos;
+
+    cursos.push_back(new Matematicas());
+    cursos.push_back(new Estructuras());
+    cursos.push_back(new Programacion()); 
     
     Foro foro;
 
@@ -82,8 +86,7 @@ int main() {
         }
     } while (opcion != 'I' && opcion != 'i');
 
-    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    cin.clear();
+    fflush(stdin);
 
     string carrera;
     cout << "Ingrese su carrera: ";
@@ -110,7 +113,8 @@ int main() {
     foro.AgregarAviso();
 
     int opc;
-    int cursos;
+    int opcion_cursos;
+    int opc_cursos;
 
     cin.clear();
 
@@ -123,53 +127,53 @@ int main() {
         case 1:
             while(true){
                 cout << "Seleccione una opción (1-" << cursos.size()<<"): ";
-                cin >> opcion;
-                if (opcion < 1 || opcion > cursos.size()){ 
+                cin >> opcion_cursos;
+                if (opcion_cursos < 1 || opcion_cursos > cursos.size()){ 
                     cout << "\nCurso no disponible, Intente de nuevo." << endl;
                 }
                 else{
                     int comprobar = true;
                     while (comprobar){
-                        cursos[opcion] -> escoger_recursos(opcion); //puntero que accede al metodo escoger recursos
+                        cursos[opcion_cursos] -> escoger_recursos(opcion_cursos); //puntero que accede al metodo escoger recursos
                         cout << "\nEscoja un recurso educativo: ";
-                        cin >> opc;
-                        if(opc < 1 || opc > 3){
+                        cin >> opc_cursos;
+                        if(opc_cursos < 1 || opc_cursos > 3){
                             cout << "\nRecurso no valido, Intente de nuevo.\n" <<endl;
                         }
                         else{
-                            if (opc == 1){
-                                if(opcion == 1){
-                                    matematicas.mostrar_recursos_educativos(opc);
+                            if (opc_cursos == 1){
+                                if(opcion_cursos == 1){
+                                    matematicas.mostrar_recursos_educativos(opc_cursos);
                                 }
-                                else if (opcion == 2){
-                                    Discreta.mostrar_recursos_educativos(opc);
+                                else if (opcion_cursos == 2){
+                                    Discreta.mostrar_recursos_educativos(opc_cursos);
                                 }
-                                else if (opcion == 3){
-                                    Progra.mostrar_recursos_educativos(opc);
+                                else if (opcion_cursos == 3){
+                                    Progra.mostrar_recursos_educativos(opc_cursos);
                                 }
                                 break;
                             }
-                            else if (opc == 2){
-                                if(opcion == 1){
-                                    matematicas.mostrar_recursos_educativos(opc);
+                            else if (opc_cursos == 2){
+                                if(opcion_cursos == 1){
+                                    matematicas.mostrar_recursos_educativos(opc_cursos);
                                 }
-                                else if (opcion == 2){
-                                    Discreta.mostrar_recursos_educativos(opc);
+                                else if (opcion_cursos == 2){
+                                    Discreta.mostrar_recursos_educativos(opc_cursos);
                                 }
-                                else if (opcion == 3){
-                                    Progra.mostrar_recursos_educativos(opc);
+                                else if (opcion_cursos == 3){
+                                    Progra.mostrar_recursos_educativos(opc_cursos);
                                 }
                                 break;
                             }
                             else{
-                                if(opcion == 1){
-                                    matematicas.mostrar_recursos_educativos(opc);
+                                if(opcion_cursos == 1){
+                                    matematicas.mostrar_recursos_educativos(opc_cursos);
                                 }
-                                else if (opcion == 2){
-                                    Discreta.mostrar_recursos_educativos(opc);
+                                else if (opcion_cursos == 2){
+                                    Discreta.mostrar_recursos_educativos(opc_cursos);
                                 }
-                                else if (opcion == 3){
-                                    Progra.mostrar_recursos_educativos(opc);
+                                else if (opcion_cursos == 3){
+                                    Progra.mostrar_recursos_educativos(opc_cursos);
                                 }
                                 break;
                             } 
