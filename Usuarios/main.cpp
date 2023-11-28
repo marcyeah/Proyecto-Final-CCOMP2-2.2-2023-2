@@ -126,6 +126,10 @@ int main() {
     switch(opc){
         case 1:
             while(true){
+                cout << endl;
+                for(int i{0}; i < cursos.size(); i++){
+                    cursos[i] -> mostrar_nombre_curso();
+                }
                 cout << "Seleccione una opción (1-" << cursos.size()<<"): ";
                 cin >> opcion_cursos;
                 if (opcion_cursos < 1 || opcion_cursos > cursos.size()){ 
