@@ -3,11 +3,13 @@
 #include <string>
 #include <stdlib.h>
 #include <unordered_map>
+#include <QtWidgets/QApplication>
 
 #include "Cypher.h"
 #include "Estudiante.h"
 #include "Foro.h"
 #include "Profesor.h"
+#include "QtWidgetsApplication1.h"
 #include "Recursos.h"
 #include "Usuario.h"
 
@@ -43,7 +45,10 @@ bool Iniciar() {
     }
 }
 
-int main() {
+int main(int argc, char *argv[]) {
+    QApplication a(argc, argv);
+    QtWidgetsApplication1 w;
+
     Recursos recursos;
     Foro foro;
 
@@ -74,17 +79,18 @@ int main() {
         }
     } while (opcion != 'I' && opcion != 'i');
 
-    fflush(stdin);
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    cin.clear();
 
     string carrera;
     cout << "Ingrese su carrera: ";
     getline(cin, carrera);
-    fflush(stdin);
+    cin.clear();
 
     string titulo;
     cout << "Ingrese el título: ";
     getline(cin, titulo);
-    fflush(stdin);
+    cin.clear();
 
     string mensaje;
     cout << "Ingrese el mensaje: ";
@@ -103,12 +109,12 @@ int main() {
     int opc;
     int cursos;
 
-    fflush(stdin);
+    cin.clear();
 
     cout << "Elige una opción: \nOpción 1: Recursos\nOpción 2: Mostrar avisos\n";
     cin >> opc;
     
-    fflush(stdin);
+    cin.clear();
     
     switch(opc){
         case 1:
@@ -137,7 +143,8 @@ int main() {
             break;
     }
 
-    return 0;
+    w.show();
+    return a.exec();
 }
 
 void Datos() {
