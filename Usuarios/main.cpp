@@ -3,14 +3,16 @@
 #include <string>
 #include <stdlib.h>
 #include <unordered_map>
-#include <QtWidgets/QApplication>
+#include <vector>
 
 #include "Cypher.h"
+#include "Estructuras_Discretas.h"
 #include "Estudiante.h"
 #include "Foro.h"
+#include "Matematica.h"
 #include "Profesor.h"
-#include "QtWidgetsApplication1.h"
-#include "Recursos.h"
+#include "Programacion.h"
+#include "Cursos.h"
 #include "Usuario.h"
 
 using namespace std;
@@ -45,11 +47,12 @@ bool Iniciar() {
     }
 }
 
-int main(int argc, char *argv[]) {
-    QApplication a(argc, argv);
-    QtWidgetsApplication1 w;
-
-    Recursos recursos;
+int main() {
+    Matematicas matematicas;
+    Estructuras Discreta;
+    Programacion Progra;
+    vector<Cursos*> cursos;
+    
     Foro foro;
 
     Datos();
@@ -119,18 +122,62 @@ int main(int argc, char *argv[]) {
     switch(opc){
         case 1:
             while(true){
-                recursos.mostrar_cursos();
-                cout << "Elige un curso (1-" << recursos.obtenerCursosDisponibles()<< "): ";
-                cin >> cursos;
-                if(cursos < 1 || cursos > recursos.obtenerCursosDisponibles()){
-                    cout << "Curso no válido, intente de nuevo." << endl;
+                cout << "Seleccione una opción (1-" << cursos.size()<<"): ";
+                cin >> opcion;
+                if (opcion < 1 || opcion > cursos.size()){ 
+                    cout << "\nCurso no disponible, Intente de nuevo." << endl;
                 }
                 else{
-                    break;
+                    int comprobar = true;
+                    while (comprobar){
+                        cursos[opcion] -> escoger_recursos(opcion); //puntero que accede al metodo escoger recursos
+                        cout << "\nEscoja un recurso educativo: ";
+                        cin >> opc;
+                        if(opc < 1 || opc > 3){
+                            cout << "\nRecurso no valido, Intente de nuevo.\n" <<endl;
+                        }
+                        else{
+                            if (opc == 1){
+                                if(opcion == 1){
+                                    matematicas.mostrar_recursos_educativos(opc);
+                                }
+                                else if (opcion == 2){
+                                    Discreta.mostrar_recursos_educativos(opc);
+                                }
+                                else if (opcion == 3){
+                                    Progra.mostrar_recursos_educativos(opc);
+                                }
+                                break;
+                            }
+                            else if (opc == 2){
+                                if(opcion == 1){
+                                    matematicas.mostrar_recursos_educativos(opc);
+                                }
+                                else if (opcion == 2){
+                                    Discreta.mostrar_recursos_educativos(opc);
+                                }
+                                else if (opcion == 3){
+                                    Progra.mostrar_recursos_educativos(opc);
+                                }
+                                break;
+                            }
+                            else{
+                                if(opcion == 1){
+                                    matematicas.mostrar_recursos_educativos(opc);
+                                }
+                                else if (opcion == 2){
+                                    Discreta.mostrar_recursos_educativos(opc);
+                                }
+                                else if (opcion == 3){
+                                    Progra.mostrar_recursos_educativos(opc);
+                                }
+                                break;
+                            } 
+                        }      
+                    }
+                    break; 
                 }
             }
-            recursos.escoger_cursos(cursos);
-            break;
 
         case 2:
             cout << "\nAvisos en el foro:" << endl;
@@ -143,8 +190,7 @@ int main(int argc, char *argv[]) {
             break;
     }
 
-    w.show();
-    return a.exec();
+    return 0;
 }
 
 void Datos() {
